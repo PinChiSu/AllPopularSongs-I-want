@@ -55,6 +55,7 @@ class PlaylistCreator:
 
 
 if __name__ == '__main__':
-    client_id, secret = parse_args()
+    args = parse_args()
+    client_id, secret = args.id, args.s
     creator = PlaylistCreator(client_id, secret)
     creator.create_playlist()

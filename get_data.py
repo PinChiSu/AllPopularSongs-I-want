@@ -160,20 +160,18 @@ class PlaylistImporter:
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Scrape data using Spotipy')
-    parser.add_argument('-id', '--client_id', type=str, required=True,
+    parser.add_argument('--id', type=str, required=True,
                         help='Spotify API client ID')
-    parser.add_argument('-s', '--secret', type=str, required=True,
+    parser.add_argument('--s', type=str, required=True,
                         help='Spotify API secret')
-    parser.add_argument('-k', '--keyword', type=str, required=True,
-                        help='Keyword for searching playlists')
-
-    args = parser.parse_args()
-    return args.client_id, args.secret
+    parser.add_argument('--k', type=str, help='Keyword for searching playlists')
+    return parser.parse_args()
 
 
 def main():
     # Create a Spotify client and a database connection
-    client_id, secret, keyword = parse_args()
+    args = parse_args()
+    client_id, secret, keyword = args.id, args.s, args.k
     spotify_client = SpotifyClient(client_id, secret, 'http://localhost:3000/')
     database = Database('localhost', 'song_stars', 'pinchi', 'keyword_tracks')
 

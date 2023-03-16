@@ -1,17 +1,27 @@
 #!/bin/bash
 
+set -e
+
 # Parse command line arguments
-while getopts id:s: flag
-do
+while getopts ":i:s:k:" flag; do
     case "${flag}" in
-        id) client_id=${OPTARG};;
-        s) secret=${OPTARG};;
-        k) keyword=${OPTARG};;
+        i) 
+            client_id=${OPTARG}
+            echo $client_id
+            ;;
+        s) 
+            secret=${OPTARG}
+            echo $secret
+            ;;
+        k)
+            keyword=${OPTARG}
+            echo $keyword
+            ;;
     esac
 done
 
 # Scrape data using spotipy
-python -m get_data -id $client_id -s $secret -k $keyword
+python -m get_data --id $client_id --s $secret --k $keyword
 
 # Run dbt pipeline
 if cd my_dbt_project; then
@@ -24,4 +34,4 @@ fi
 
 # Add tracks to a new playlist
 cd ..
-python -m create_playlist -id $client_id -s $secret
+python -m create_playlist --id $client_id --s $secret
