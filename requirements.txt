@@ -1,0 +1,8 @@
+argparse
+flake8
+spotipy
+oauth2
+psycopg2
+pytest
+dbt-postgres
+jinja2

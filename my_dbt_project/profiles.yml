@@ -1,0 +1,12 @@
+# example profiles.yml file
+default:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: pinchi
+      port: 5432
+      password: 'Pinch0000'
+      dbname: "song_stars"
+      schema: public
