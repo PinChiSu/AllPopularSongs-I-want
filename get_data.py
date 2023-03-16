@@ -164,7 +164,11 @@ def parse_args():
                         help='Spotify API client ID')
     parser.add_argument('--s', type=str, required=True,
                         help='Spotify API secret')
-    parser.add_argument('--k', type=str, help='Keyword for searching playlists')
+    parser.add_argument(
+        '--k',
+        type=str,
+        help='Keyword for searching playlists'
+    )
     return parser.parse_args()
 
 

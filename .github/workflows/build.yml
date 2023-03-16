@@ -17,7 +17,7 @@ jobs:
       
       - name: Run pipeline and Flake8 tests
         run: |
-          python get_data.py -id ${{ secrets.SPOTIPY_CLIENT_ID }} -s ${{ secrets.SPOTIPY_CLIENT_SECRET }} -k ${{ secrets.SPOTIPY_CLIENT_SECRET }}
+          python get_data.py --id ${{ secrets.SPOTIPY_CLIENT_ID }} --s ${{ secrets.SPOTIPY_CLIENT_SECRET }} --k ${{ secrets.SPOTIPY_CLIENT_SECRET }}
           flake8
         env:
           SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
