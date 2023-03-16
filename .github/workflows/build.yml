@@ -1,0 +1,25 @@
+name: My Workflow
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      
+      - name: Install Python and Dependencies
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+      - run: pip install -r requirements.txt
+      
+      - name: Run pipeline and Flake8 tests
+        run: |
+          python get_data.py -id ${{ secrets.SPOTIPY_CLIENT_ID }} -s ${{ secrets.SPOTIPY_CLIENT_SECRET }} -k ${{ secrets.SPOTIPY_CLIENT_SECRET }}
+          flake8
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_SECRET: ${{ secrets.SPOTIFY_SECRET }}
+          SPOTIFY_KEYWORD: ${{ secrets.SPOTIFY_KEYWORD }}
