@@ -6,6 +6,7 @@ from spotipy.oauth2 import SpotifyOAuth
 import re
 
 # Set up PostgreSQL
+HOST = 'my-postgresql-container'
 DATABASE_NAME = 'song_stars'
 DATABASE_USER = 'pinchi'
 DATABASE_PASSWORD = 'Pinch0000'
@@ -44,11 +45,12 @@ class SpotifyClient:
 
 
 class Database:
-    def __init__(self, host, database, user, table_name):
+    def __init__(self, host, database, user, password, table_name):
         self.conn = psycopg2.connect(
             host=host,
             database=database,
-            user=user
+            user=user,
+            password=password
         )
         self.cur = self.conn.cursor()
         self.table_name = table_name
@@ -177,11 +179,15 @@ def main():
     args = parse_args()
     client_id, secret, keyword = args.id, args.s, args.k
     spotify_client = SpotifyClient(client_id, secret, 'http://localhost:3000/')
-    database = Database('localhost', 'song_stars', 'pinchi', 'keyword_tracks')
+    print(HOST)
+    database = Database(HOST, DATABASE_NAME, DATABASE_USER, DATABASE_PASSWORD, 'keyword_tracks')
 
     # Create the 'tracks' table if it doesn't exist yet
     database.create_tracks_table()
-
+    print("In Python")
+    print(client_id)
+    print(secret)
+    print(keyword)
     # Import the playlist into the database
     playlist_importer = PlaylistImporter(
         keyword,  # get the keyword

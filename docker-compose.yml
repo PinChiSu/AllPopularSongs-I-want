@@ -1,0 +1,38 @@
+version: "3"
+
+services:
+  my-postgresql-container:
+    build:
+      context: .
+      dockerfile: postgresql.Dockerfile
+    restart: always
+    environment:
+      POSTGRES_USER: pinchi
+      POSTGRES_PASSWORD: Pinch0000
+      POSTGRES_DB: song_stars
+    networks:
+      my-network:
+        ipv4_address: 172.16.238.10
+
+  app:
+    build:
+      context: .
+      dockerfile: app.Dockerfile
+      args:
+        CLIENT_ID: b8f4e09cdc814542ba0e1bbdf8c7f7cd
+        SECRET: e718678452f4495f998e66b43869ab07
+        KEYWORD: drill
+    depends_on:
+      - my-postgresql-container
+    image: playlistdb-app
+    ports:
+      - "8080:8080"
+    networks:
+      my-network:
+        ipv4_address: 172.16.238.20
+
+networks:
+  my-network:
+    ipam:
+      config:
+        - subnet: 172.16.238.0/24
