@@ -19,8 +19,8 @@ services:
       context: .
       dockerfile: app.Dockerfile
       args:
-        CLIENT_ID: b8f4e09cdc814542ba0e1bbdf8c7f7cd
-        SECRET: e718678452f4495f998e66b43869ab07
+        CLIENT_ID: client_id
+        SECRET: client_secret
         KEYWORD: drill
     depends_on:
       - my-postgresql-container
