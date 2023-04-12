@@ -10,20 +10,8 @@ models:
   search_path: ["models"]
   # Use the `song_stars` schema in the target database
   song_stars:
-    # Use the `public` schema in the source database
-    # schema: public
     # Define the sources to use in the models
     sources:
       - name: tracks
         tables:
           - name: tracks
-
-# Define the target database where the models will be built
-# target:
-#   # Use the `song_stars` schema in the target database
-#   schema: "song_stars"
-#   # Specify the type of adapter (Postgres) and the database name
-#   database: "song_stars"
-#   # Specify the connection information for the target database
-#   profile: "default"
-# 
